@@ -30,11 +30,13 @@ public class SpawnerBehaviour : BuildingBehaviour {
     }
 
     // Update is called once per frame
+    /*
     new void Update () {
         base.Update();
 
 
     }
+    */
 
     private void SpawningMouip()
     {

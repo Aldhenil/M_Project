@@ -7,7 +7,7 @@ public class MouipBase : MouipBehaviour {
 	// Use this for initialization
 	new void Start () {
         base.Start();
-
+        
 	}
 	
 	// Update is called once per frame

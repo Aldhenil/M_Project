@@ -32,15 +32,16 @@ public class MouipBehaviour : EntitiyBehaviour {
 
         InvokeRepeating("Security360OrNegativeCAPRotationMouip", 60.0f, 60.0f);
         InvokeRepeating("SecurityBattleLandChecker", 1.0f, 1.0f);
+        
     }
 
     new protected void Update () {
-        base.Update();
+        //base.Update();
 
         UpdateCircularPosition();
 
         // Déplacement de l'entité, en fonction de son orientation horizontal, et proportionnel à la superficie de la planète.
-        EntityAngle += !Sr.flipX ? Time.deltaTime * ((speed/gm.pi.radiusLimitHeigth)/2.0f)*100.0f : Time.deltaTime * -(((speed / gm.pi.radiusLimitHeigth) / 2.0f) * 100.0f);
+        entityAngle += !Sr.flipX ? Time.deltaTime * ((speed/gm.pi.radiusLimitHeigth)/2.0f)*100.0f : Time.deltaTime * -(((speed / gm.pi.radiusLimitHeigth) / 2.0f) * 100.0f);
 
         // Check si l'entité ne dépasse pas la limite de Battle Land
         //SecurityBattleLandChecker(); // Opti : Ne lancer ce Check QUE lorsque l'entité change sa hauteur. Opti2: Ne lancer ce check QUE tout les X secondes (Coroutine).
@@ -57,13 +58,13 @@ public class MouipBehaviour : EntitiyBehaviour {
     /// </summary>
     private void Security360OrNegativeCAPRotationMouip()
     {
-        if (EntityAngle > 360.0f)
+        if (GetEntityAngle > 360.0f)
         {
-            EntityAngle = EntityAngle % 360.0f;
+            SetEntityAngle = GetEntityAngle % 360.0f;
         }
-        if (EntityAngle < 0.0f)
+        if (GetEntityAngle < 0.0f)
         {
-            EntityAngle = (-EntityAngle) % 360.0f;
+            SetEntityAngle = (-GetEntityAngle) % 360.0f;
         }
     }
 

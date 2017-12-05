@@ -50,7 +50,7 @@ public class PlaneteBehaviour : MonoBehaviour {
             case (MOUIP_TYPE.BASIC):
                 MouipBehaviour newMouip = Instantiate(gm.mouipBasic, transform);
                 newMouip.EntityHeight = _spawnerData.EntityHeight;
-                newMouip.EntityAngle = _spawnerData.EntityAngle;
+                newMouip.SetEntityAngle = _spawnerData.GetEntityAngle;
                 // newMouip.speed = 1.0f;
                 newMouip.GetComponent<SpriteRenderer>().flipX = _spawnerData.GetComponent<SpriteRenderer>().flipX;
                 entitiesList.Add(newMouip);
@@ -68,7 +68,7 @@ public class PlaneteBehaviour : MonoBehaviour {
             case (MOUIP_TYPE.BASIC):
                 MouipBehaviour newMouip = Instantiate(gm.mouipBasic, transform);
                 newMouip.EntityHeight = Random.Range(radiusLimitDown, radiusLimitHeigth);
-                newMouip.EntityAngle = gm.ci.AngleDeVue;
+                newMouip.SetEntityAngle = gm.ci.AngleDeVue;
                 float tempRand = Random.Range(0, 2);
                 newMouip.Sr.flipX = tempRand == 0 ? true : false;
                 entitiesList.Add(newMouip);

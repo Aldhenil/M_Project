@@ -23,7 +23,7 @@ public class CameraManager : MonoBehaviour{
             if (target.GetComponents<IMouip>() != null) // Si c'est un mouip.
             {
                 // Se fixe sur l'angle de l'unité.
-                AngleDeVue = target.GetComponent<MouipBehaviour>().EntityAngle;
+                AngleDeVue = target.GetComponent<MouipBehaviour>().GetEntityAngle;
             }
         }
 

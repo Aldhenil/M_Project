@@ -8,7 +8,7 @@ public class EntitiyBehaviour : MonoBehaviour {
     protected GameManager gm;
     private SpriteRenderer sr;
 
-    public float EntityAngle = 0f;
+    protected float entityAngle = 0f;
     public float EntityHeight = 0f;
 
     public SpriteRenderer Sr
@@ -24,6 +24,22 @@ public class EntitiyBehaviour : MonoBehaviour {
         }
     }
 
+    public float GetEntityAngle
+    {
+        get
+        {
+            return Mathf.Abs(entityAngle) % 360.0f;
+        }
+    }
+
+    public float SetEntityAngle
+    {
+        set
+        {
+            entityAngle = Mathf.Abs(value) % 360.0f;
+        }
+    }
+
     protected void Awake()
     {
         Sr = GetComponent<SpriteRenderer>();
@@ -36,21 +52,16 @@ public class EntitiyBehaviour : MonoBehaviour {
 
     }
 
-    // Update is called once per frame
-    protected void Update () {
-
-    }
-
     public void UpdateCircularPosition()
     {
         // Position Trigonométrique circulaire des unités.
         transform.position = new Vector3(
-            /*X*/ gm.pi.transform.position.x + (Mathf.Cos((-(gm.ci.AngleDeVue + 90.0f /*Correction de placement*/) / 180 * Mathf.PI) + (EntityAngle / 180 * Mathf.PI))) * (EntityHeight),
-            /*Y*/ gm.pi.transform.position.y - (Mathf.Sin((-(gm.ci.AngleDeVue + 90.0f /*Correction de placement*/) / 180 * Mathf.PI) + (EntityAngle / 180 * Mathf.PI))) * (EntityHeight),
+            /*X*/ gm.pi.transform.position.x + (Mathf.Cos((-(gm.ci.AngleDeVue + 90.0f /*Correction de placement*/) / 180 * Mathf.PI) + (GetEntityAngle / 180 * Mathf.PI))) * (EntityHeight),
+            /*Y*/ gm.pi.transform.position.y - (Mathf.Sin((-(gm.ci.AngleDeVue + 90.0f /*Correction de placement*/) / 180 * Mathf.PI) + (GetEntityAngle / 180 * Mathf.PI))) * (EntityHeight),
             /*Z*/ transform.position.z);
 
         // Correction de sens de rotation.
-        transform.localEulerAngles = new Vector3(0, 0, -(EntityAngle));
+        transform.localEulerAngles = new Vector3(0, 0, -(GetEntityAngle));
     }
 
     // Trie des entités.
@@ -71,27 +82,6 @@ public class EntitiyBehaviour : MonoBehaviour {
         {
             gm.pi.entitiesList[i].sr.sortingOrder = gm.pi.entitiesList.Count - i;
         }
-    }
-
-    /// <summary>
-    /// Fonction READ, qui permet d'obtenir l'angle actuel de l'entité sur la planète.
-    /// </summary>
-    /// <returns>Retourne un FLOAT.</returns>
-    protected float GetEntityAngle(EntitiyBehaviour _entity)
-    {
-        float entAngleTemp = _entity.EntityAngle;
-        float entAngle = entAngleTemp;
-
-        if (entAngleTemp > 360.0f)
-        {
-            entAngle = EntityAngle % 360.0f;
-        }
-        else if (EntityAngle < 0.0f)
-        {
-            entAngle = (-EntityAngle) % 360.0f;
-        }
-
-        return entAngle;
     }
 
 }
